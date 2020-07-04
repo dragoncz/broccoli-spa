@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button } from 'antd';
+import RequestCollector from '../RequestCollector';
 import styles from './index.module.css';
 
 const Banner = props => (
   <div className={styles.banner}>
+    {/* Slogan */}
     <h2>
       <span>A better way</span>
       <span>to enjoy everyday.</span>
@@ -11,7 +12,8 @@ const Banner = props => (
 
     <p>Be the first to know when we launch.</p>
 
-    <Button type="primary">Request an invite</Button>
+    {/* Invite button */}
+    <RequestCollector />
   </div>
 );
 
