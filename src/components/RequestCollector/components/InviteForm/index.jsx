@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Form, Input, Modal } from 'antd';
 
-const InviteForm = ({ visible, onSubmit, onCancel }) => {
+const InviteForm = ({ visible, loading, onSubmit, onCancel }) => {
   const [form] = Form.useForm();
 
   // Reset form whenever this form shows or hide
@@ -24,9 +24,14 @@ const InviteForm = ({ visible, onSubmit, onCancel }) => {
       forceRender // fix "Warning: Instance created by useForm is not connect to any Form element. "
       visible={visible}
       centered
+      closable={false}
+      maskClosable={false}
+      keyboard={false}
       title="Request an invite"
-      okText="Send"
+      confirmLoading={loading}
+      okText={loading ? "Sending..." : "Send"}
       cancelText="Cancel"
+      cancelButtonProps={{disabled: loading}}
       onCancel={onCancel}
       onOk={onOk}
     >
@@ -46,7 +51,7 @@ const InviteForm = ({ visible, onSubmit, onCancel }) => {
             },
           ]}
         >
-          <Input />
+          <Input disabled={loading} placeholder="Please input your full name" />
         </Form.Item>
 
         {/* Email */}
@@ -60,11 +65,11 @@ const InviteForm = ({ visible, onSubmit, onCancel }) => {
             },
             {
               required: true,
-              message: 'Please input your Email.',
+              message: 'Please input your Email address.',
             },
           ]}
         >
-          <Input />
+          <Input disabled={loading} placeholder="Please input your Email address" />
         </Form.Item>
 
         {/* Confirm Email */}
@@ -87,7 +92,7 @@ const InviteForm = ({ visible, onSubmit, onCancel }) => {
             })
           ]}
         >
-          <Input />
+          <Input disabled={loading} placeholder="Please input your Email address again" />
         </Form.Item>
       </Form>
     </Modal>
