@@ -4,7 +4,7 @@ import { message } from 'antd';
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.REACT_APP_BASE_API, // url = base url + request url
-  timeout: 5000 // request timeout
+  timeout: 15000 // request timeout
 })
 
 // request interceptor
@@ -38,16 +38,24 @@ service.interceptors.response.use(
 
     // if the custom code is not 200, it is judged as an error.
     if (response.status !== 200) {
-      message.error(res.message || 'Something went wrong, please try later.')
+      message.error(res.errorMessage || 'Something went wrong, please try later.')
 
-      return Promise.reject(new Error(res.message || 'Error'))
+      return Promise.reject(new Error(res.errorMessage || 'Error'))
     } else {
       return res
     }
   },
   error => {
+    const response = error.response
+
+    // Deal with bad request error
+    if (response.status === 400) {
+      message.error(response.data.errorMessage)
+    } else {
+      message.error(error.message)
+    }
+
     console.log('[server]request error: ' + error) // for debug
-    message.error(error.message)
 
     return Promise.reject(error)
   }
