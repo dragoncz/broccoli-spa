@@ -22,7 +22,7 @@ const RequestCollector = () => {
       // notification
       notification.success({
         message: "All set!",
-        description: "Thank you! Your request has been received, keep tuned!"
+        description: "Thank you! Your request has been received, stay tuned!"
       })
 
       // Close the dialog and reset loading status
