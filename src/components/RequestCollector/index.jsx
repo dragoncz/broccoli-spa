@@ -22,7 +22,8 @@ const RequestCollector = () => {
       // notification
       notification.success({
         message: "All set!",
-        description: "Thank you! Your request has been received, stay tuned!"
+        description: "You will be one of the first to experience Broccoli & Co. when we launch, stay tuned!",
+        duration: 0  // disable auto dismiss
       })
 
       // Close the dialog and reset loading status
